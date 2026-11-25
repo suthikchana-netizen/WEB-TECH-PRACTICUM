@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #263445;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(120deg, #102a43, #176b87);
+    color: white;
+    padding: 35px 8%;
+}
+
+header h1 {
+    font-size: 34px;
+    letter-spacing: 1px;
+}
+
+header p {
+    color: #dceaf4;
+    margin-top: 8px;
+}
+
+nav {
+    background: #12354a;
+    padding: 15px 8%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #70e1d1;
+}
+
+.hero {
+    padding: 50px 8%;
+    background: white;
+}
+
+.hero h2 {
+    font-size: 30px;
+    color: #12617a;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 850px;
+    margin-bottom: 20px;
+}
+
+.hero img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+section {
+    background: white;
+    margin: 25px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+section h2 {
+    color: #12617a;
+    margin-bottom: 12px;
+}
+
+section p {
+    margin-bottom: 15px;
+}
+
+.media-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: #eef5f9;
+    border-radius: 12px;
+}
+
+.video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+button {
+    border: none;
+    background: #12617a;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 5px 5px 5px 0;
+}
+
+button:hover {
+    background: #0d4659;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#audioStatus {
+    color: #12617a;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.resource-frame {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #d5e0e8;
+    border-radius: 10px;
+    background: white;
+}
+
+.resource-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #12617a;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.resource-link:hover {
+    background: #0d4659;
+}
+
+footer {
+    background: #102a43;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 5px;
+}
+
+@media(max-width: 700px) {
+    header h1 {
+        font-size: 27px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .hero img {
+        height: 240px;
+    }
+
+    section {
+        margin: 12px;
+        padding: 22px;
+    }
+
+    .resource-frame {
+        height: 350px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIRTUAL LABORATORY</h1>
+    <p>Explore Science Through Digital Experiments</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#audio">Audio Learning</a>
+    <a href="#video">Video Lab</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#resources">Resources</a>
+</nav>
+
+<!-- HOME -->
+
+<div class="hero" id="home">
+
+    <h2>Welcome to the Virtual Laboratory</h2>
+
+    <p>
+        A digital learning environment that helps students explore scientific
+        concepts through experiments, demonstrations, multimedia learning
+        and interactive laboratory resources.
+    </p>
+
+    <p>
+        Learn at your own pace, observe scientific processes and improve
+        your understanding of Physics, Chemistry, Biology and technology.
+    </p>
+
+    <img
+        src="https://images.unsplash.com/photo-1581093458791-9d15482442f5?auto=format&fit=crop&w=1400&q=85"
+        alt="Modern scientific laboratory with research equipment and workstations"
+    >
+
+</div>
+
+<!-- AUDIO LEARNING -->
+
+<section id="audio">
+
+    <h2>Audio Learning</h2>
+
+    <p>
+        Listen to a spoken introduction to the Virtual Laboratory and
+        understand how digital experiments support scientific learning.
+    </p>
+
+    <div class="media-container">
+
+        <button onclick="playNarration()">▶ Play</button>
+
+        <button onclick="pauseNarration()">⏸ Pause</button>
+
+        <button onclick="restartNarration()">↻ Restart</button>
+
+        <p id="audioStatus">Narration is ready.</p>
+
+    </div>
+
+</section>
+
+<!-- VIDEO -->
+
+<section id="video">
+
+    <h2>Virtual Labs – Educational Video</h2>
+
+    <p>
+        Watch an educational introduction to Virtual Labs and understand
+        how digital laboratory experiments help students explore scientific
+        concepts and learn through simulations.
+    </p>
+
+    <div class="media-container">
+
+        <div class="video-wrapper">
+
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/wNwEDnqOcng?controls=1&rel=0"
+                title="Virtual Labs educational video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+        <p>
+            <small>
+                Use the video controls to play, pause, adjust volume,
+                change video position and enter fullscreen mode.
+            </small>
+        </p>
+
+        <p>
+            <a
+                href="https://www.youtube.com/watch?v=wNwEDnqOcng"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open video on YouTube
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- EXPERIMENTS -->
+
+<section id="experiments">
+
+    <h2>Virtual Experiments</h2>
+
+    <p>
+        Virtual laboratories allow students to explore scientific
+        experiments in a digital environment. They provide access to
+        laboratory learning, demonstrations, simulation tools and
+        experiment-based activities.
+    </p>
+
+    <p>
+        Students can explore laboratory concepts, observe outcomes
+        and learn the fundamentals of scientific experimentation
+        through online resources.
+    </p>
+
+</section>
+
+<!-- EMBEDDED RESOURCE -->
+
+<section id="resources">
+
+    <h2>Virtual Lab Learning Resource</h2>
+
+    <p>
+        Explore online laboratory experiments, simulation activities
+        and educational resources through the Virtual Labs platform.
+    </p>
+
+    <div class="media-container">
+
+        <iframe
+            class="resource-frame"
+            src="https://www.vlab.co.in/"
+            title="Virtual Labs educational platform"
+            loading="lazy"
+        ></iframe>
+
+        <a
+            class="resource-link"
+            href="https://www.vlab.co.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Open Virtual Labs Website
+        </a>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>Virtual Laboratory</h3>
+
+    <p>Learn | Explore | Experiment | Discover</p>
+
+    <p>Digital Learning Through Scientific Exploration</p>
+
+    <p>&copy; 2026 Virtual Laboratory</p>
+
+</footer>
+
+<script>
+
+const narrationText =
+"Welcome to the Virtual Laboratory. " +
+"This platform provides a digital environment for scientific learning. " +
+"Students can explore experiments, observe scientific processes, " +
+"and understand concepts through virtual demonstrations. " +
+"Virtual laboratories make learning more interactive and accessible. " +
+"Explore the experiments and discover science through technology.";
+
+let narration = null;
+
+function playNarration() {
+
+    if (!("speechSynthesis" in window)) {
+        document.getElementById("audioStatus").textContent =
+        "Audio narration is not supported in this browser.";
+        return;
+    }
+
+    // Resume narration if paused
+    if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+
+        document.getElementById("audioStatus").textContent =
+        "Narration is playing...";
+        return;
+    }
+
+    // Prevent starting the same narration repeatedly
+    if (window.speechSynthesis.speaking) {
+        return;
+    }
+
+    startNarration();
+}
+
+function startNarration() {
+
+    narration = new SpeechSynthesisUtterance(narrationText);
+
+    narration.lang = "en-IN";
+    narration.rate = 0.9;
+    narration.pitch = 1;
+    narration.volume = 1;
+
+    narration.onstart = function() {
+        document.getElementById("audioStatus").textContent =
+        "Narration is playing...";
+    };
+
+    narration.onend = function() {
+        document.getElementById("audioStatus").textContent =
+        "Narration completed.";
+    };
+
+    narration.onerror = function() {
+        document.getElementById("audioStatus").textContent =
+        "Unable to play narration.";
+    };
+
+    window.speechSynthesis.speak(narration);
+}
+
+function pauseNarration() {
+
+    if (window.speechSynthesis.speaking &&
+        !window.speechSynthesis.paused) {
+
+        window.speechSynthesis.pause();
+
+        document.getElementById("audioStatus").textContent =
+        "Narration paused.";
+    }
+}
+
+function restartNarration() {
+
+    if (!("speechSynthesis" in window)) {
+        document.getElementById("audioStatus").textContent =
+        "Audio narration is not supported in this browser.";
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    document.getElementById("audioStatus").textContent =
+    "Restarting narration...";
+
+    setTimeout(function() {
+        startNarration();
+    }, 250);
+}
+
+</script>
+PRAC 2 
+</body>
+</html>

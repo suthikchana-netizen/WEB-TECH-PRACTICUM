@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fb;
+}
+
+/* Header */
+header {
+    background-color: #12345a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #087eaf;
+    padding: 15px 5%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: white;
+    color: #087eaf;
+}
+
+/* Main Content */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+}
+
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card h2 {
+    color: #12345a;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Footer */
+footer {
+    background-color: #12345a;
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 50px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        width: 100%;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Laboratory</h1>
+    <p>Explore Experiments and Learn Online</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#experiments">Experiments</a></li>
+        <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container" id="home">
+    <div class="card">
+        <h2>Welcome to Virtual Laboratory</h2>
+        <p>
+            The Virtual Laboratory provides an online learning
+            environment where students can explore scientific
+            experiments, understand practical concepts and improve
+            their technical knowledge.
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Virtual Laboratory. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

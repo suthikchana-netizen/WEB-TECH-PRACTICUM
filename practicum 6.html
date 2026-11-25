@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory - CSS Positioning</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Static Position */
+header {
+    position: static;
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* Sticky Position */
+nav {
+    position: sticky;
+    top: 0;
+    background: #087eaf;
+    padding: 15px;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffe082;
+}
+
+/* Main Content */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+h2 {
+    color: #12345a;
+    margin-bottom: 15px;
+}
+
+/* Relative Position */
+.relative-box {
+    position: relative;
+    left: 20px;
+    background: #d9efff;
+    padding: 20px;
+    border-left: 5px solid #087eaf;
+    margin: 15px 0;
+}
+
+/* Absolute Position */
+.lab-card {
+    position: relative;
+    background: #e8f5e9;
+    padding: 30px;
+    height: 160px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.lab-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #168447;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+
+/* Fixed Position */
+.fixed-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #e66a25;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    z-index: 200;
+}
+
+/* Footer */
+footer {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .relative-box {
+        left: 0;
+    }
+
+    .fixed-button {
+        right: 12px;
+        bottom: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header id="home">
+    <h1>Virtual Laboratory</h1>
+    <p>Interactive Online Learning Platform</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#static">Static</a></li>
+        <li><a href="#relative">Relative</a></li>
+        <li><a href="#absolute">Absolute</a></li>
+        <li><a href="#sticky">Sticky</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <section class="section" id="static">
+        <h2>1. Static Positioning</h2>
+        <p>
+            Static is the default positioning property in CSS.
+            Elements appear in their normal document flow.
+        </p>
+        <div style="background:#e3e8ef; padding:15px;">
+            This section uses Static Positioning.
+        </div>
+    </section>
+
+    <section class="section" id="relative">
+        <h2>2. Relative Positioning</h2>
+        <p>
+            Relative positioning moves an element from its
+            original position without removing it from the
+            normal document flow.
+        </p>
+        <div class="relative-box">
+            This box uses position: relative.
+        </div>
+    </section>
+
+    <section class="section" id="absolute">
+        <h2>3. Absolute Positioning</h2>
+        <p>
+            Absolute positioning places an element relative
+            to its nearest positioned ancestor.
+        </p>
+
+        <div class="lab-card">
+            <span class="lab-label">Available</span>
+            <h3>Computer Science Laboratory</h3>
+            <p>Perform programming and practical experiments online.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>4. Fixed Positioning</h2>
+        <p>
+            The orange Help button at the bottom-right corner
+            uses fixed positioning. It remains in the same
+            position when the page is scrolled.
+        </p>
+    </section>
+
+    <section class="section" id="sticky">
+        <h2>5. Sticky Positioning</h2>
+        <p>
+            The blue navigation bar uses sticky positioning.
+            It remains at the top of the browser window when
+            scrolling down the webpage.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>About Virtual Laboratory</h2>
+        <p>
+            Virtual Laboratory is an online platform that
+            provides students with practical learning
+            experiences through digital experiments.
+            Students can access laboratory resources,
+            explore subjects and improve technical skills.
+        </p>
+    </section>
+
+</div>
+
+<a href="#home" class="fixed-button">Help / Top ↑</a>
+
+<footer>
+    <p>&copy; 2026 Virtual Laboratory. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

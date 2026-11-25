@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: #12345a;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header p {
+    margin-top: 8px;
+}
+
+nav {
+    background: #1e4976;
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #12345a;
+}
+
+.search-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+input, select {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #2563eb;
+    border-color: #2563eb;
+}
+
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #0001;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px #0002;
+}
+
+.card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #12345a;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 8px 0;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #12345a;
+}
+
+.details {
+    margin-top: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+details {
+    margin-top: 12px;
+    padding: 12px;
+    background: #eaf1fa;
+    border-radius: 6px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#noResults {
+    display: none;
+    padding: 20px;
+    text-align: center;
+    color: #dc2626;
+}
+
+footer {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 35px;
+}
+
+@media(max-width:600px) {
+    nav a {
+        display: inline-block;
+        margin: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIRTUAL LABORATORY</h1>
+    <p>Explore, Learn and Perform Experiments Online</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#help">Help</a>
+</nav>
+
+<div class="container">
+
+<section id="experiments">
+
+    <h2>Explore Virtual Experiments</h2>
+
+    <div class="search-area">
+
+        <input type="text" id="search"
+        placeholder="Search experiments...">
+
+        <select id="subject">
+            <option value="all">All Subjects</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electronics">Electronics</option>
+        </select>
+
+        <select id="level">
+            <option value="all">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+
+    </div>
+
+    <div class="experiment-grid" id="experimentList">
+
+        <div class="card" data-subject="Physics"
+        data-level="Beginner">
+            <img src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=500"
+            alt="Physics laboratory experiment">
+            <h3>Ohm's Law</h3>
+            <p>Subject: Physics</p>
+            <p>Level: Beginner</p>
+            <button class="viewBtn">View Experiment</button>
+        </div>
+
+        <div class="card" data-subject="Chemistry"
+        data-level="Intermediate">
+            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500"
+            alt="Chemistry laboratory">
+            <h3>Acid Base Titration</h3>
+            <p>Subject: Chemistry</p>
+            <p>Level: Intermediate</p>
+            <button class="viewBtn">View Experiment</button>
+        </div>
+
+        <div class="card" data-subject="Computer Science"
+        data-level="Beginner">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500"
+            alt="Computer science circuit board">
+            <h3>Logic Gates</h3>
+            <p>Subject: Computer Science</p>
+            <p>Level: Beginner</p>
+            <button class="viewBtn">View Experiment</button>
+        </div>
+
+        <div class="card" data-subject="Electronics"
+        data-level="Advanced">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500"
+            alt="Electronics laboratory equipment">
+            <h3>Digital Circuits</h3>
+            <p>Subject: Electronics</p>
+            <p>Level: Advanced</p>
+            <button class="viewBtn">View Experiment</button>
+        </div>
+
+    </div>
+
+    <p id="noResults">No experiments found!</p>
+
+</section>
+
+<section class="details" id="help">
+
+    <h2>Laboratory Guidelines</h2>
+
+    <details>
+        <summary>How to use Virtual Laboratory?</summary>
+        <p>Search for an experiment, select a subject and difficulty
+        level, and click View Experiment.</p>
+    </details>
+
+    <details>
+        <summary>Benefits of Virtual Laboratory</summary>
+        <ul>
+            <li>Learn through online experiments.</li>
+            <li>Practice without physical equipment.</li>
+            <li>Improve practical knowledge.</li>
+            <li>Access experiments anytime.</li>
+        </ul>
+    </details>
+
+</section>
+
+<section class="details" id="selected">
+    <h2>Selected Experiment</h2>
+    <p id="experimentInfo">
+        Select an experiment to view its details.
+    </p>
+</section>
+
+</div>
+
+<footer>
+    <p>Virtual Laboratory | Online Practical Learning System</p>
+</footer>
+
+<script>
+
+const search = document.querySelector("#search");
+const subject = document.querySelector("#subject");
+const level = document.querySelector("#level");
+
+const cards = document.querySelectorAll(".card");
+const noResults = document.querySelector("#noResults");
+const info = document.querySelector("#experimentInfo");
+
+function filterExperiments() {
+
+    let searchText = search.value.toLowerCase();
+    let selectedSubject = subject.value;
+    let selectedLevel = level.value;
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+
+        let title = card.querySelector("h3").textContent.toLowerCase();
+
+        let matchSearch = title.includes(searchText);
+
+        let matchSubject =
+        selectedSubject === "all" ||
+        card.dataset.subject === selectedSubject;
+
+        let matchLevel =
+        selectedLevel === "all" ||
+        card.dataset.level === selectedLevel;
+
+        if(matchSearch && matchSubject && matchLevel) {
+            card.classList.remove("hidden");
+            card.style.display = "block";
+            visibleCount++;
+        } else {
+            card.classList.add("hidden");
+            card.style.display = "none";
+        }
+
+    });
+
+    noResults.style.display =
+    visibleCount === 0 ? "block" : "none";
+}
+
+search.addEventListener("input", filterExperiments);
+subject.addEventListener("change", filterExperiments);
+level.addEventListener("change", filterExperiments);
+
+document.querySelectorAll(".viewBtn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        let card = this.closest(".card");
+        let experiment = card.querySelector("h3").textContent;
+        let category = card.dataset.subject;
+        let difficulty = card.dataset.level;
+
+        info.textContent =
+        "Experiment: " + experiment +
+        " | Subject: " + category +
+        " | Level: " + difficulty +
+        " | Status: Selected";
+
+        info.classList.add("selected");
+
+        document.querySelector("#selected")
+        .scrollIntoView({behavior: "smooth"});
+
+    });
+
+});
+
+// Find an experiment by its title
+const firstExperiment = Array.from(cards).find(card =>
+    card.querySelector("h3").textContent === "Ohm's Law"
+);
+
+if(firstExperiment) {
+    firstExperiment.classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>

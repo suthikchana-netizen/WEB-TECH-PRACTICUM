@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory</title>
+
+<style>
+
+/* GENERAL STYLING */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f7fb;
+    color: #263445;
+    line-height: 1.6;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(120deg, #102a43, #176b87);
+    color: white;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #64e4d5;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 390px;
+    background: linear-gradient(
+        rgba(10, 40, 65, 0.85),
+        rgba(10, 75, 105, 0.85)
+    );
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 43px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 25px;
+}
+
+.hero button {
+    background-color: #21c5ad;
+    color: #102a43;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero button:hover {
+    background-color: white;
+    transform: translateY(-3px);
+}
+
+/* COMMON SECTION */
+section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    color: #123c59;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    text-align: center;
+    color: #657789;
+    margin-bottom: 35px;
+}
+
+/* ABOUT SECTION */
+.about {
+    background-color: white;
+    text-align: center;
+}
+
+.about p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 16px;
+    color: #536575;
+}
+
+/* EXPERIMENT CARDS */
+.experiment-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #e0e8ef;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.13);
+    border-color: #21bba9;
+}
+
+.card-icon {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #176b87;
+    margin-bottom: 12px;
+    font-size: 21px;
+}
+
+.card p {
+    color: #657789;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card button {
+    background-color: #176b87;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card button:hover {
+    background-color: #21bba9;
+    color: #102a43;
+}
+
+/* FEATURES SECTION */
+.features {
+    background-color: #e8f3f7;
+}
+
+.feature-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background: white;
+    width: 220px;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px;
+    border-bottom: 4px solid #21bba9;
+}
+
+.feature h3 {
+    color: #176b87;
+    margin-bottom: 8px;
+}
+
+/* CONTACT SECTION */
+.contact {
+    background-color: white;
+    text-align: center;
+}
+
+.contact p {
+    color: #657789;
+    margin: 8px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #102a43;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    font-size: 14px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .experiment-container {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">🔬 Virtual Laboratory</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<div class="hero" id="home">
+    <h1>Welcome to Virtual Laboratory</h1>
+
+    <p>
+        Explore science, perform virtual experiments and
+        improve your practical knowledge through interactive learning.
+    </p>
+
+    <button onclick="document.getElementById('experiments').scrollIntoView({behavior:'smooth'})">
+        Explore Experiments
+    </button>
+</div>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+
+    <h2 class="section-title">About Our Laboratory</h2>
+
+    <p>
+        Virtual Laboratory is an online learning platform that allows
+        students to understand scientific concepts through virtual
+        experiments. Students can explore different laboratory subjects,
+        learn practical procedures and improve their technical skills
+        in a simple and interactive environment.
+    </p>
+
+</section>
+
+<!-- EXPERIMENT SECTION -->
+<section id="experiments">
+
+    <h2 class="section-title">Our Experiments</h2>
+
+    <p class="section-description">
+        Discover different laboratory experiments and learning activities.
+    </p>
+
+    <div class="experiment-container">
+
+        <div class="card">
+            <div class="card-icon">⚗️</div>
+            <h3>Chemistry Lab</h3>
+            <p>
+                Learn chemical reactions, solutions and
+                basic chemistry experiments.
+            </p>
+            <button onclick="alert('Chemistry Laboratory Selected!')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Physics Lab</h3>
+            <p>
+                Understand electricity, motion, force and
+                other physics concepts.
+            </p>
+            <button onclick="alert('Physics Laboratory Selected!')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">💻</div>
+            <h3>Computer Lab</h3>
+            <p>
+                Practice programming, computer fundamentals
+                and technical activities.
+            </p>
+            <button onclick="alert('Computer Laboratory Selected!')">
+                Explore
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features" id="features">
+
+    <h2 class="section-title">Why Choose Our Lab?</h2>
+
+    <p class="section-description">
+        A simple and effective way to learn practical concepts.
+    </p>
+
+    <div class="feature-container">
+
+        <div class="feature">
+            <h3>📚 Easy Learning</h3>
+            <p>Understand concepts through simple explanations.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🌐 Online Access</h3>
+            <p>Access laboratory learning from anywhere.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🧪 Practical Skills</h3>
+            <p>Improve your knowledge through experiments.</p>
+        </div>
+
+        <div class="feature">
+            <h3>⏰ Flexible Learning</h3>
+            <p>Learn at your own pace and convenience.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact" id="contact">
+
+    <h2 class="section-title">Contact Us</h2>
+
+    <p>Email: support@virtuallab.com</p>
+    <p>Phone: +91 98765 43210</p>
+    <p>Address: Virtual Learning Centre, India</p>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Virtual Laboratory. All Rights Reserved.</p>
+    <p>Designed using HTML5 and CSS3</p>
+</footer>
+
+</body>
+</html>

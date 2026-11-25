@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory - Responsive Website</title>
+
+<style>
+
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #12345a;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+/* Navigation */
+nav {
+    background-color: #087eaf;
+    padding: 15px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffe082;
+}
+
+/* Welcome Section */
+.welcome {
+    background: white;
+    text-align: center;
+    padding: 45px 20px;
+    margin: 25px;
+    border-radius: 10px;
+}
+
+.welcome h2 {
+    color: #12345a;
+    margin-bottom: 15px;
+}
+
+/* Experiment Section */
+.experiments {
+    padding: 25px;
+    text-align: center;
+}
+
+.experiments h2 {
+    color: #12345a;
+    margin-bottom: 25px;
+}
+
+/* Experiment Cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .symbol {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #087eaf;
+    margin-bottom: 10px;
+}
+
+/* About Section */
+.about {
+    background: white;
+    padding: 30px;
+    margin: 30px 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* TABLET VIEW */
+@media screen and (max-width: 900px) {
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    nav ul {
+        gap: 20px;
+    }
+
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .welcome {
+        padding: 35px 15px;
+    }
+}
+
+/* MOBILE VIEW */
+@media screen and (max-width: 600px) {
+
+    header {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .welcome {
+        margin: 15px;
+        padding: 25px 15px;
+    }
+
+    .welcome h2 {
+        font-size: 21px;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
+    .experiments {
+        padding: 15px;
+    }
+
+    .about {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    footer {
+        font-size: 13px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>Virtual Laboratory</h1>
+    <p>Learn, Explore and Perform Experiments Online</p>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#experiments">Experiments</a></li>
+        <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Welcome Section -->
+<section class="welcome" id="home">
+    <h2>Welcome to Virtual Laboratory</h2>
+
+    <p>
+        Virtual Laboratory is an online educational platform
+        that allows students to explore scientific concepts
+        and perform practical experiments in a digital environment.
+    </p>
+</section>
+
+<!-- Experiments Section -->
+<section class="experiments" id="experiments">
+
+    <h2>Our Laboratory Experiments</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+            <div class="symbol">💻</div>
+            <h3>Computer Science</h3>
+            <p>Learn programming, algorithms and software development.</p>
+        </div>
+
+        <div class="card">
+            <div class="symbol">⚡</div>
+            <h3>Electrical Engineering</h3>
+            <p>Explore electrical circuits and electronic components.</p>
+        </div>
+
+        <div class="card">
+            <div class="symbol">🔬</div>
+            <h3>Physics Laboratory</h3>
+            <p>Understand physics concepts through practical experiments.</p>
+        </div>
+
+        <div class="card">
+            <div class="symbol">🧪</div>
+            <h3>Chemistry Laboratory</h3>
+            <p>Study chemical reactions and laboratory procedures.</p>
+        </div>
+
+        <div class="card">
+            <div class="symbol">⚙️</div>
+            <h3>Mechanical Engineering</h3>
+            <p>Explore machines, tools and engineering systems.</p>
+        </div>
+
+        <div class="card">
+            <div class="symbol">🧬</div>
+            <h3>Biology Laboratory</h3>
+            <p>Learn about cells, organisms and biological systems.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+    <h2>About Our Platform</h2>
+
+    <p>
+        Our Virtual Laboratory provides a digital learning
+        environment for students. It helps learners understand
+        practical concepts, improve technical knowledge and
+        access laboratory experiments from different devices.
+    </p>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+    <p>&copy; 2026 Virtual Laboratory. All Rights Reserved.</p>
+    <p>Contact: virtuallab@example.com</p>
+</footer>
+
+</body>
+</html>

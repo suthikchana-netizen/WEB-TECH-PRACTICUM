@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory Settings</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    color: #1e293b;
+    margin: 0;
+    padding: 20px;
+    transition: 0.4s;
+}
+
+header {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.container {
+    max-width: 750px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px #0002;
+    transition: 0.4s;
+}
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.setting p {
+    margin-bottom: 0;
+    color: #64748b;
+}
+
+/* Custom Toggle Switch */
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.toggle input {
+    appearance: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #94a3b8;
+    border-radius: 30px;
+    transition: 0.4s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.toggle input:checked + .slider {
+    background: #16a34a;
+}
+
+.toggle input:checked + .slider::before {
+    transform: translateX(28px);
+}
+
+.toggle input:focus-visible + .slider {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+}
+
+.status {
+    padding: 15px;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+}
+
+/* Dark Mode */
+
+body.dark {
+    background: #0f172a;
+    color: white;
+}
+
+body.dark .container {
+    background: #1e293b;
+}
+
+body.dark .setting {
+    background: #334155;
+}
+
+body.dark .setting p {
+    color: #cbd5e1;
+}
+
+body.dark .status {
+    background: #334155;
+    color: #bfdbfe;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #64748b;
+}
+
+body.dark footer {
+    color: #cbd5e1;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Laboratory</h1>
+    <p>Experiment Settings Control Panel</p>
+</header>
+
+<div class="container">
+
+    <h2>Laboratory Settings</h2>
+
+    <p>Customize your virtual experiment environment.</p>
+
+    <!-- Dark Mode -->
+    <div class="setting">
+
+        <div>
+            <strong>Dark Mode</strong>
+            <p>Change the laboratory appearance.</p>
+        </div>
+
+        <label class="toggle">
+            <input type="checkbox" id="darkMode">
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+    <!-- Simulation Mode -->
+    <div class="setting">
+
+        <div>
+            <strong>Experiment Simulation</strong>
+            <p>Enable or disable experiment simulation.</p>
+        </div>
+
+        <label class="toggle">
+            <input type="checkbox" id="simulation">
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+    <!-- Sound Effects -->
+    <div class="setting">
+
+        <div>
+            <strong>Sound Effects</strong>
+            <p>Enable or disable laboratory sounds.</p>
+        </div>
+
+        <label class="toggle">
+            <input type="checkbox" id="sound">
+            <span class="slider"></span>
+        </label>
+
+    </div>
+
+    <!-- Status Display -->
+    <div class="status">
+
+        <h3>Current Laboratory Status</h3>
+
+        <p id="darkStatus">Dark Mode: OFF</p>
+
+        <p id="simulationStatus">
+            Experiment Simulation: OFF
+        </p>
+
+        <p id="soundStatus">Sound Effects: OFF</p>
+
+    </div>
+
+    <br>
+
+    <button id="reset">Reset Settings</button>
+
+</div>
+
+<footer>
+    <p>Virtual Laboratory Management System</p>
+</footer>
+
+<script>
+
+// Get toggle elements
+const darkMode = document.getElementById("darkMode");
+
+const simulation = document.getElementById("simulation");
+
+const sound = document.getElementById("sound");
+
+// Load saved settings from Local Storage
+darkMode.checked =
+localStorage.getItem("darkMode") === "true";
+
+simulation.checked =
+localStorage.getItem("simulation") === "true";
+
+sound.checked =
+localStorage.getItem("sound") === "true";
+
+
+// Update Dark Mode
+function updateDarkMode() {
+
+    document.body.classList.toggle(
+        "dark",
+        darkMode.checked
+    );
+
+    document.getElementById("darkStatus").textContent =
+    "Dark Mode: " + (darkMode.checked ? "ON" : "OFF");
+
+    localStorage.setItem(
+        "darkMode",
+        darkMode.checked
+    );
+
+}
+
+
+// Update Experiment Simulation
+function updateSimulation() {
+
+    document.getElementById("simulationStatus").textContent =
+    "Experiment Simulation: " +
+    (simulation.checked ? "ON" : "OFF");
+
+    localStorage.setItem(
+        "simulation",
+        simulation.checked
+    );
+
+}
+
+
+// Update Sound Effects
+function updateSound() {
+
+    document.getElementById("soundStatus").textContent =
+    "Sound Effects: " +
+    (sound.checked ? "ON" : "OFF");
+
+    localStorage.setItem(
+        "sound",
+        sound.checked
+    );
+
+}
+
+
+// Add Event Listeners
+darkMode.addEventListener("change", updateDarkMode);
+
+simulation.addEventListener("change", updateSimulation);
+
+sound.addEventListener("change", updateSound);
+
+
+// Reset all settings
+document.getElementById("reset").addEventListener("click", function() {
+
+    darkMode.checked = false;
+    simulation.checked = false;
+    sound.checked = false;
+
+    updateDarkMode();
+    updateSimulation();
+    updateSound();
+
+});
+
+
+// Apply saved settings when page loads
+updateDarkMode();
+updateSimulation();
+updateSound();
+
+</script>
+
+</body>
+</html>
+

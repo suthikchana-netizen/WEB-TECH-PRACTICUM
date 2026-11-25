@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory - DOM Manipulation</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Header */
+header {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* Navigation */
+nav {
+    background: #0f2945;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+}
+
+/* Main section */
+section {
+    padding: 30px 8%;
+}
+
+h2 {
+    color: #123c69;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: 2px solid #1677c8;
+}
+
+button {
+    background: #1677c8;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    margin: 8px 5px 0 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0c4a82;
+}
+
+.cancel-btn {
+    background: #64748b;
+}
+
+/* Experiment cards */
+#experimentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.experiment-card {
+    background: white;
+    padding: 22px;
+    border: 1px solid #dbe3ec;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000012;
+}
+
+.experiment-card h3 {
+    color: #123c69;
+    margin-bottom: 12px;
+}
+
+.experiment-card p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.edit-btn {
+    background: #e69b16;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+/* Instructions */
+.instructions {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.instructions ul {
+    padding-left: 25px;
+}
+
+.instructions li {
+    margin: 10px 0;
+}
+
+/* Message */
+#message {
+    color: #15803d;
+    font-weight: bold;
+    margin-top: 12px;
+    min-height: 20px;
+}
+
+footer {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+@media(max-width: 600px) {
+    section {
+        padding: 20px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIRTUAL LABORATORY</h1>
+    <p>Dynamic Experiment Management System</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#manage">Manage Experiments</a>
+    <a href="#experiments">Experiments</a>
+</nav>
+
+<section id="home">
+    <h2>Welcome to Virtual Laboratory</h2>
+
+    <p>
+        This platform allows students to manage laboratory experiments
+        dynamically. Users can add, view, update and delete experiment
+        information using JavaScript DOM manipulation.
+    </p>
+</section>
+
+<section id="manage">
+
+    <h2>Manage Laboratory Experiments</h2>
+
+    <div class="form-container">
+
+        <h3 id="formTitle">Add New Experiment</h3>
+
+        <input type="text" id="expName"
+        placeholder="Enter Experiment Name">
+
+        <input type="text" id="expSubject"
+        placeholder="Enter Subject (Physics/Chemistry/Computer)">
+
+        <input type="text" id="expDescription"
+        placeholder="Enter Experiment Description">
+
+        <button id="saveBtn">Add Experiment</button>
+
+        <button id="cancelBtn" class="cancel-btn"
+        style="display:none;">Cancel Edit</button>
+
+        <p id="message"></p>
+
+    </div>
+
+</section>
+
+<section id="experiments">
+
+    <h2>Available Laboratory Experiments</h2>
+
+    <div id="experimentList">
+
+        <!-- Experiment cards are created using JavaScript -->
+
+    </div>
+
+</section>
+
+<section class="instructions">
+
+    <h2>How to Use the System</h2>
+
+    <ul>
+        <li>Enter the experiment name.</li>
+        <li>Enter the subject name.</li>
+        <li>Provide a short experiment description.</li>
+        <li>Click Add Experiment to save the information.</li>
+        <li>Click Edit to modify an existing experiment.</li>
+        <li>Click Delete to remove an experiment.</li>
+    </ul>
+
+</section>
+
+<footer>
+    <p>© 2026 Virtual Laboratory | Experiment Management System</p>
+</footer>
+
+<script>
+
+// Get HTML elements
+const expName = document.getElementById("expName");
+const expSubject = document.getElementById("expSubject");
+const expDescription = document.getElementById("expDescription");
+
+const experimentList = document.getElementById("experimentList");
+const saveBtn = document.getElementById("saveBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const message = document.getElementById("message");
+const formTitle = document.getElementById("formTitle");
+
+// Experiment data
+let experiments = [
+    {
+        id: 1,
+        name: "Ohm's Law Experiment",
+        subject: "Physics",
+        description: "Study the relationship between voltage, current and resistance."
+    },
+    {
+        id: 2,
+        name: "Chemical Reaction",
+        subject: "Chemistry",
+        description: "Understand chemical reactions and their properties."
+    },
+    {
+        id: 3,
+        name: "Programming Basics",
+        subject: "Computer Science",
+        description: "Learn basic programming concepts and logic."
+    }
+];
+
+let editId = null;
+
+// Display experiments
+function displayExperiments() {
+
+    experimentList.innerHTML = "";
+
+    experiments.forEach(function(exp) {
+
+        // Create card
+        const card = document.createElement("div");
+        card.classList.add("experiment-card");
+
+        const heading = document.createElement("h3");
+        heading.textContent = exp.name;
+
+        const subject = document.createElement("p");
+        subject.textContent = "Subject: " + exp.subject;
+
+        const description = document.createElement("p");
+        description.textContent = exp.description;
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.classList.add("edit-btn");
+
+        editButton.setAttribute("data-id", exp.id);
+
+        editButton.addEventListener("click", function() {
+            editExperiment(exp.id);
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-btn");
+
+        deleteButton.setAttribute("data-id", exp.id);
+
+        deleteButton.addEventListener("click", function() {
+            deleteExperiment(exp.id);
+        });
+
+        // Add elements to card
+        card.appendChild(heading);
+        card.appendChild(subject);
+        card.appendChild(description);
+        card.appendChild(editButton);
+        card.appendChild(deleteButton);
+
+        // Add card to webpage
+        experimentList.appendChild(card);
+
+    });
+}
+
+// Add or update experiment
+saveBtn.addEventListener("click", function() {
+
+    const name = expName.value.trim();
+    const subject = expSubject.value.trim();
+    const description = expDescription.value.trim();
+
+    if(name === "" || subject === "" || description === "") {
+        message.textContent = "Please fill in all fields!";
+        return;
+    }
+
+    if(editId === null) {
+
+        // Add new experiment
+        const newExperiment = {
+            id: Date.now(),
+            name: name,
+            subject: subject,
+            description: description
+        };
+
+        experiments.push(newExperiment);
+
+        message.textContent = "Experiment added successfully!";
+
+    } else {
+
+        // Update existing experiment
+        const exp = experiments.find(function(item) {
+            return item.id === editId;
+        });
+
+        if(exp) {
+            exp.name = name;
+            exp.subject = subject;
+            exp.description = description;
+        }
+
+        message.textContent = "Experiment updated successfully!";
+
+        editId = null;
+        saveBtn.textContent = "Add Experiment";
+        formTitle.textContent = "Add New Experiment";
+        cancelBtn.style.display = "none";
+    }
+
+    clearForm();
+    displayExperiments();
+
+});
+
+// Edit experiment
+function editExperiment(id) {
+
+    const exp = experiments.find(function(item) {
+        return item.id === id;
+    });
+
+    if(exp) {
+
+        expName.value = exp.name;
+        expSubject.value = exp.subject;
+        expDescription.value = exp.description;
+
+        editId = id;
+
+        saveBtn.textContent = "Update Experiment";
+        formTitle.textContent = "Modify Experiment";
+
+        cancelBtn.style.display = "inline-block";
+
+        document.querySelector("#manage")
+        .scrollIntoView({behavior: "smooth"});
+
+        message.textContent = "Editing selected experiment.";
+
+    }
+}
+
+// Delete experiment
+function deleteExperiment(id) {
+
+    const card = document.querySelector(
+        '[data-id="' + id + '"].delete-btn'
+    );
+
+    if(card) {
+        card.parentElement.remove();
+    }
+
+    experiments = experiments.filter(function(exp) {
+        return exp.id !== id;
+    });
+
+    if(editId === id) {
+        clearForm();
+        editId = null;
+        saveBtn.textContent = "Add Experiment";
+        formTitle.textContent = "Add New Experiment";
+        cancelBtn.style.display = "none";
+    }
+
+    message.textContent = "Experiment deleted successfully!";
+
+    displayExperiments();
+
+}
+
+// Clear input fields
+function clearForm() {
+
+    expName.value = "";
+    expSubject.value = "";
+    expDescription.value = "";
+
+}
+
+// Cancel editing
+cancelBtn.addEventListener("click", function() {
+
+    editId = null;
+
+    clearForm();
+
+    saveBtn.textContent = "Add Experiment";
+    formTitle.textContent = "Add New Experiment";
+
+    cancelBtn.style.display = "none";
+
+    message.textContent = "Editing cancelled.";
+
+});
+
+// Display initial experiments
+displayExperiments();
+
+</script>
+
+</body>
+</html>

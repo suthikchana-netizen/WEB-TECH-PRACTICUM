@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory - API Integration</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Header */
+header {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+/* Navigation */
+nav {
+    background: #0f2945;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+}
+
+/* Main section */
+section {
+    padding: 30px 7%;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px #00000012;
+}
+
+h2 {
+    color: #123c69;
+    margin-bottom: 15px;
+}
+
+.description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Buttons */
+button {
+    background: #1677c8;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background: #0c4a82;
+}
+
+/* Status messages */
+#loading {
+    display: none;
+    color: #1677c8;
+    font-weight: bold;
+    padding: 15px;
+}
+
+#error {
+    display: none;
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#success {
+    color: #15803d;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Table */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+thead {
+    background: #123c69;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 14px;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background: #eff6ff;
+}
+
+tbody tr:hover {
+    background: #dbeafe;
+}
+
+footer {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media(max-width: 600px) {
+    section {
+        padding: 20px 4%;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIRTUAL LABORATORY</h1>
+    <p>API Integrated Experiment Information Dashboard</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#dashboard">Experiment Dashboard</a>
+</nav>
+
+<section id="home">
+
+    <div class="container">
+
+        <h2>Welcome to Virtual Laboratory</h2>
+
+        <p class="description">
+            This application retrieves information from an external
+            API and displays the received JSON data dynamically.
+            Students can view laboratory-related learning resources
+            through this interactive dashboard.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="dashboard">
+
+    <div class="container">
+
+        <h2>Experiment Information Dashboard</h2>
+
+        <p class="description">
+            The following information is retrieved from an online
+            API and displayed in a structured table.
+        </p>
+
+        <button id="refreshBtn">Refresh Data</button>
+
+        <p id="loading">Loading experiment information...</p>
+
+        <p id="error"></p>
+
+        <p id="success"></p>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Experiment Title</th>
+                        <th>Description</th>
+                        <th>User ID</th>
+                    </tr>
+                </thead>
+
+                <tbody id="dataTable">
+
+                    <tr>
+                        <td colspan="4">
+                            Click Refresh Data to load information.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 Virtual Laboratory | API Integration System</p>
+</footer>
+
+<script>
+
+// API Endpoint
+const API_URL =
+"https://jsonplaceholder.typicode.com/posts?_limit=10";
+
+// Get HTML elements
+const dataTable = document.getElementById("dataTable");
+const loading = document.getElementById("loading");
+const error = document.getElementById("error");
+const success = document.getElementById("success");
+const refreshBtn = document.getElementById("refreshBtn");
+
+// Fetch API data
+async function fetchExperiments() {
+
+    // Display loading message
+    loading.style.display = "block";
+    error.style.display = "none";
+    success.textContent = "";
+
+    refreshBtn.disabled = true;
+
+    dataTable.innerHTML = "";
+
+    try {
+
+        // Send API request
+        const response = await fetch(API_URL);
+
+        // Check response status
+        if (!response.ok) {
+            throw new Error("Unable to retrieve API data.");
+        }
+
+        // Convert response into JSON
+        const data = await response.json();
+
+        // Check received data
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid data received from API.");
+        }
+
+        // Display JSON data
+        data.forEach(function(item) {
+
+            // Create table row
+            const row = document.createElement("tr");
+
+            // Create ID column
+            const idCell = document.createElement("td");
+            idCell.textContent = item.id;
+
+            // Create title column
+            const titleCell = document.createElement("td");
+            titleCell.textContent = item.title;
+
+            // Create description column
+            const descriptionCell = document.createElement("td");
+            descriptionCell.textContent = item.body;
+
+            // Create user ID column
+            const userCell = document.createElement("td");
+            userCell.textContent = item.userId;
+
+            // Append cells to row
+            row.appendChild(idCell);
+            row.appendChild(titleCell);
+            row.appendChild(descriptionCell);
+            row.appendChild(userCell);
+
+            // Append row to table
+            dataTable.appendChild(row);
+
+        });
+
+        // Display success message
+        success.textContent =
+        "Successfully loaded " + data.length +
+        " records from the API.";
+
+    }
+
+    catch (err) {
+
+        // Display error message
+        error.textContent =
+        "Error: " + err.message +
+        " Please check your internet connection and try again.";
+
+        error.style.display = "block";
+
+        dataTable.innerHTML = "";
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+
+        cell.textContent = "No data available.";
+        cell.colSpan = 4;
+
+        row.appendChild(cell);
+        dataTable.appendChild(row);
+
+    }
+
+    finally {
+
+        // Hide loading message
+        loading.style.display = "none";
+
+        // Enable refresh button
+        refreshBtn.disabled = false;
+
+    }
+
+}
+
+// Refresh button event
+refreshBtn.addEventListener("click", fetchExperiments);
+
+// Load data when webpage opens
+fetchExperiments();
+
+</script>
+
+</body>
+</html>

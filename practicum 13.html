@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory Task Manager</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: #123b63;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header p {
+    color: #dbeafe;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+section {
+    background: white;
+    padding: 22px;
+    margin-bottom: 22px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #00000012;
+}
+
+h2 {
+    color: #123b63;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+textarea {
+    grid-column: span 2;
+}
+
+button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    background: #2563eb;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.task-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.task-card {
+    border: 1px solid #cbd5e1;
+    border-left: 5px solid #2563eb;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+.task-card:hover {
+    background: #f8fafc;
+    transition: 0.3s;
+}
+
+.task-card ul {
+    padding-left: 20px;
+}
+
+.task-card li {
+    margin: 10px 0;
+}
+
+.task-card button {
+    margin: 5px 3px;
+}
+
+.delete {
+    background: #dc2626;
+}
+
+.edit {
+    background: #0f766e;
+}
+
+#cancelBtn {
+    background: #64748b;
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+}
+
+th {
+    background: #dbeafe;
+}
+
+@media(max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    textarea {
+        grid-column: span 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIRTUAL LABORATORY</h1>
+    <p>Experiment Task Management System</p>
+</header>
+
+<div class="container">
+
+<section>
+    <h2>🧪 Add Experiment Task</h2>
+
+    <form id="taskForm">
+
+        <input type="text" id="name"
+        placeholder="Experiment Name" required>
+
+        <select id="subject" required>
+            <option value="">Select Laboratory</option>
+            <option>Physics Laboratory</option>
+            <option>Chemistry Laboratory</option>
+            <option>Computer Science Laboratory</option>
+            <option>Electronics Laboratory</option>
+            <option>Mathematics Laboratory</option>
+        </select>
+
+        <select id="type" required>
+            <option value="">Select Activity</option>
+            <option>Virtual Simulation</option>
+            <option>Practical Experiment</option>
+            <option>Observation Record</option>
+            <option>Lab Report</option>
+            <option>Assessment</option>
+        </select>
+
+        <input type="date" id="date" required>
+
+        <select id="status">
+            <option>Not Started</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+        </select>
+
+        <textarea id="description"
+        placeholder="Enter experiment instructions"></textarea>
+
+        <button type="submit" id="saveBtn">
+            Add Experiment
+        </button>
+
+        <button type="button" id="cancelBtn">
+            Cancel Edit
+        </button>
+
+    </form>
+</section>
+
+<section>
+    <h2>🔍 Search Experiments</h2>
+
+    <input type="text" id="search"
+    placeholder="Search experiment...">
+
+    <br><br>
+
+    <select id="filter">
+        <option value="All">All Activities</option>
+        <option>Not Started</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+    </select>
+</section>
+
+<section>
+    <h2>📋 Laboratory Experiment Tasks</h2>
+    <div id="taskList" class="task-list"></div>
+</section>
+
+<section>
+    <h2>📊 Experiment Progress</h2>
+
+    <table>
+        <tr>
+            <th>Total</th>
+            <th>Not Started</th>
+            <th>In Progress</th>
+            <th>Completed</th>
+        </tr>
+
+        <tr>
+            <td id="total">0</td>
+            <td id="pending">0</td>
+            <td id="progress">0</td>
+            <td id="completed">0</td>
+        </tr>
+    </table>
+</section>
+
+</div>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("labTasks")) || [];
+let editId = null;
+
+const form = document.getElementById("taskForm");
+const taskList = document.getElementById("taskList");
+
+// Save tasks
+function saveTasks() {
+    localStorage.setItem("labTasks", JSON.stringify(tasks));
+}
+
+// Clear form
+function clearForm() {
+    form.reset();
+    editId = null;
+    saveBtn.textContent = "Add Experiment";
+    cancelBtn.style.display = "none";
+}
+
+// Display tasks
+function displayTasks() {
+
+    taskList.innerHTML = "";
+
+    let keyword = search.value.toLowerCase();
+    let selected = filter.value;
+
+    let result = tasks.filter(task =>
+        task.name.toLowerCase().includes(keyword) &&
+        (selected === "All" || task.status === selected)
+    );
+
+    result.forEach(task => {
+
+        let card = document.createElement("div");
+        card.className = "task-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "🧪 " + task.name;
+
+        const details = document.createElement("ul");
+
+        [
+            "Laboratory: " + task.subject,
+            "Activity: " + task.type,
+            "Due Date: " + task.date,
+            "Instructions: " + (task.description || "No instructions"),
+            "Status: " + task.status
+        ].forEach(value => {
+            let li = document.createElement("li");
+            li.textContent = value;
+            details.appendChild(li);
+        });
+
+        const edit = document.createElement("button");
+        edit.textContent = "Edit";
+        edit.className = "edit";
+
+        const del = document.createElement("button");
+        del.textContent = "Delete";
+        del.className = "delete";
+
+        const update = document.createElement("select");
+
+        ["Not Started", "In Progress", "Completed"].forEach(value => {
+            let option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+            update.appendChild(option);
+        });
+
+        update.value = task.status;
+
+        // Edit experiment
+        edit.addEventListener("click", () => {
+
+            editId = task.id;
+
+            document.getElementById("name").value = task.name;
+            document.getElementById("subject").value = task.subject;
+            document.getElementById("type").value = task.type;
+            document.getElementById("date").value = task.date;
+            document.getElementById("status").value = task.status;
+            document.getElementById("description").value = task.description;
+
+            saveBtn.textContent = "Update Experiment";
+            cancelBtn.style.display = "inline-block";
+
+            window.scrollTo({top: 0, behavior: "smooth"});
+        });
+
+        // Delete experiment
+        del.addEventListener("click", () => {
+
+            if(confirm("Delete this experiment task?")) {
+                tasks = tasks.filter(t => t.id !== task.id);
+                saveTasks();
+                displayTasks();
+            }
+        });
+
+        // Update experiment status
+        update.addEventListener("change", () => {
+
+            let found = tasks.find(t => t.id === task.id);
+
+            if(found) {
+                found.status = update.value;
+                saveTasks();
+                displayTasks();
+            }
+        });
+
+        card.appendChild(heading);
+        card.appendChild(details);
+        card.appendChild(edit);
+        card.appendChild(del);
+        card.appendChild(update);
+
+        taskList.appendChild(card);
+    });
+
+    updateSummary();
+}
+
+// Add and update experiment
+form.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    let task = {
+        id: editId || Date.now(),
+        name: document.getElementById("name").value.trim(),
+        subject: document.getElementById("subject").value,
+        type: document.getElementById("type").value,
+        date: document.getElementById("date").value,
+        status: document.getElementById("status").value,
+        description: document.getElementById("description").value.trim()
+    };
+
+    if(!task.name) {
+        alert("Enter experiment name");
+        return;
+    }
+
+    if(editId) {
+        let index = tasks.findIndex(t => t.id === editId);
+        if(index !== -1) {
+            tasks[index] = task;
+        }
+    } else {
+        tasks.push(task);
+    }
+
+    saveTasks();
+    clearForm();
+    displayTasks();
+});
+
+// Cancel edit
+cancelBtn.addEventListener("click", clearForm);
+
+// Search experiments
+search.addEventListener("input", displayTasks);
+
+// Filter tasks
+filter.addEventListener("change", displayTasks);
+
+// Update summary
+function updateSummary() {
+
+    document.getElementById("total").textContent = tasks.length;
+
+    document.getElementById("pending").textContent =
+        tasks.filter(t => t.status === "Not Started").length;
+
+    document.getElementById("progress").textContent =
+        tasks.filter(t => t.status === "In Progress").length;
+
+    document.getElementById("completed").textContent =
+        tasks.filter(t => t.status === "Completed").length;
+}
+
+// Load saved experiments
+displayTasks();
+
+</script>
+
+</body>
+</html>

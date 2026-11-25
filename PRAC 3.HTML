@@ -1,0 +1,86 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Laboratory Registration</title>
+</head>
+<body>
+
+    <h1>Virtual Laboratory</h1>
+    <h2>Student Experiment Registration</h2>
+
+    <form>
+
+        <!-- Text Input -->
+        <label>Student Name:</label>
+        <input type="text" placeholder="Enter your name" required>
+        <br><br>
+
+        <!-- Email -->
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your email" required>
+        <br><br>
+
+        <!-- Password -->
+        <label>Password:</label>
+        <input type="password" placeholder="Enter password" required>
+        <br><br>
+
+        <!-- Number -->
+        <label>Student Age:</label>
+        <input type="number" min="13" max="100" required>
+        <br><br>
+
+        <!-- Date -->
+        <label>Experiment Date:</label>
+        <input type="date" required>
+        <br><br>
+
+        <!-- Radio Buttons -->
+        <label>Study Level:</label>
+        <input type="radio" name="level" value="school" required> School
+        <input type="radio" name="level" value="college"> College
+        <input type="radio" name="level" value="other"> Other
+        <br><br>
+
+        <!-- Checkboxes -->
+        <label>Choose Laboratory:</label>
+        <input type="checkbox" value="physics"> Physics
+        <input type="checkbox" value="chemistry"> Chemistry
+        <input type="checkbox" value="biology"> Biology
+        <input type="checkbox" value="computer"> Computer Science
+        <br><br>
+
+        <!-- Dropdown -->
+        <label>Select Experiment:</label>
+        <select required>
+            <option value="">Select Experiment</option>
+            <option>Ohm's Law</option>
+            <option>Virtual Chemistry Lab</option>
+            <option>Plant Cell Observation</option>
+            <option>Programming Experiment</option>
+        </select>
+        <br><br>
+
+        <!-- Textarea -->
+        <label>Experiment Details:</label>
+        <br>
+        <textarea rows="4" cols="40" placeholder="Enter experiment details"></textarea>
+        <br><br>
+
+        <!-- File Input -->
+        <label>Upload Student ID or Experiment File:</label>
+        <input type="file" accept=".pdf,.jpg,.png">
+        <br><br>
+
+        <!-- Submit and Reset -->
+        <input type="submit" value="Submit Registration">
+        <input type="reset" value="Reset">
+
+    </form>
+PRAC 3 
+</body>
+</html>
+```

@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Laboratory - Image Gallery</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Navigation */
+nav {
+    background: #087eaf;
+    padding: 15px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffe082;
+}
+
+/* Gallery Heading */
+.gallery-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.gallery-section h2 {
+    text-align: center;
+    color: #12345a;
+    margin-bottom: 10px;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* CSS Grid Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Gallery Cards */
+.gallery-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Images */
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Captions */
+.caption {
+    padding: 18px;
+    text-align: center;
+}
+
+.caption h3 {
+    color: #087eaf;
+    margin-bottom: 8px;
+}
+
+.caption p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-section {
+        padding: 12px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+}
+
+/* Footer */
+footer {
+    background: #12345a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Virtual Laboratory</h1>
+    <p>Explore Science Through Digital Experiments</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#experiments">Experiments</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+
+<section class="gallery-section" id="gallery">
+
+    <h2>Laboratory Image Gallery</h2>
+
+    <p class="description">
+        Explore different laboratory environments and practical experiments.
+    </p>
+
+    <div class="gallery">
+
+        <!-- Image 1 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800"
+                 alt="Modern science laboratory">
+            <div class="caption">
+                <h3>Science Laboratory</h3>
+                <p>A modern laboratory for scientific research and experiments.</p>
+            </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"
+                 alt="Student working with computer">
+            <div class="caption">
+                <h3>Computer Laboratory</h3>
+                <p>Learn programming and perform computer-based experiments.</p>
+            </div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800"
+                 alt="Engineering laboratory equipment">
+            <div class="caption">
+                <h3>Engineering Laboratory</h3>
+                <p>Explore engineering concepts using practical equipment.</p>
+            </div>
+        </div>
+
+        <!-- Image 4 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=800"
+                 alt="Scientific research experiment">
+            <div class="caption">
+                <h3>Research Laboratory</h3>
+                <p>Understand scientific research and experimental methods.</p>
+            </div>
+        </div>
+
+        <!-- Image 5 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1581093458791-9d42e3c7b5d7?w=800"
+                 alt="Industrial engineering equipment">
+            <div class="caption">
+                <h3>Industrial Technology</h3>
+                <p>Study industrial tools, machines and modern technologies.</p>
+            </div>
+        </div>
+
+        <!-- Image 6 -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800"
+                 alt="Microscope in laboratory">
+            <div class="caption">
+                <h3>Biology Laboratory</h3>
+                <p>Explore biological samples and microscopic observations.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Virtual Laboratory. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
